@@ -628,7 +628,7 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* --- Donation Section --- */
+        /* --- ANIMATED PAYMENT & DONATION SECTION --- */
         .donate-box {
             padding: 80px 8%;
             background: var(--primary-blue);
@@ -636,30 +636,85 @@
             text-align: center;
         }
 
-        .m-pesa-card {
-            background: var(--white);
+        .payment-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .animated-payment-card {
+            background: #ffffff;
             color: var(--primary-blue);
-            display: inline-block;
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 30px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            padding: 30px 20px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 310px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            animation: floatCard 3.5s ease-in-out infinite, glowPulse 3s infinite alternate;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .animated-payment-card:hover {
+            transform: translateY(-12px) scale(1.03);
+        }
+
+        .card-crdb {
+            animation-delay: 1.75s;
+        }
+
+        .payment-type-badge {
+            position: absolute;
+            top: -12px;
+            background: var(--primary-orange);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .bank-logo-img {
+            height: 48px;
+            object-fit: contain;
+            margin: 15px 0;
         }
 
         .btn-action {
             background: var(--primary-orange);
             color: white;
-            padding: 15px 40px;
+            padding: 12px 30px;
             border: none;
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
             text-transform: uppercase;
-            margin-top: 20px;
+            margin-top: 15px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
         }
 
-        .btn-action:hover { background: var(--deep-blue); transform: scale(1.05); }
+        .btn-action:hover { background: var(--deep-blue); color: white; transform: scale(1.05); }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.8deg); }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 10px 25px rgba(255, 140, 0, 0.2), 0 0 0 3px rgba(255, 140, 0, 0.5); }
+            100% { box-shadow: 0 20px 40px rgba(0, 200, 83, 0.35), 0 0 0 5px rgba(0, 200, 83, 0.8); }
+        }
 
         /* --- Contact Section --- */
         .contact-section {
@@ -712,6 +767,7 @@
             .ctrl-btn { padding: 8px 14px; font-size: 0.85rem; }
             .stats-counter-row { gap: 12px; }
             .stat-item h3 { font-size: 1.3rem; }
+            .payment-wrapper { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -746,8 +802,8 @@
 
         <!-- RADIO CARD -->
         <div class="radio-card-ui" id="live">
-            <audio id="radioPlayer" crossorigin="anonymous">
-                <source src="https://pastoraloyce.duckdns.org/listen/kainos_fm_radio/radio.mp3" type="audio/mpeg">
+            <!-- Imeboreshwa kwa ajili ya iPhone/iOS: 'playsinline', hakuna crossorigin na src imewekwa moja kwa moja -->
+            <audio id="radioPlayer" playsinline webkit-playsinline preload="none" src="https://pastoraloyce.duckdns.org/listen/kainos_fm_radio/radio.mp3">
                 Kivinjari chako hakisupport ku-play audio hii.
             </audio>
 
@@ -782,17 +838,17 @@
 
             <div class="stats-counter-row">
                 <div class="stat-item stat-red">
-                    <h3 id="followCount">0</h3>
+                    <h3 id="followCount">264</h3>
                     <p>Followers</p>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item stat-blue">
-                    <h3 id="likeCount">0</h3>
+                    <h3 id="likeCount">203</h3>
                     <p>Likes</p>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item stat-green">
-                    <h3 id="shareCount">0</h3>
+                    <h3 id="shareCount">341</h3>
                     <p>Shares</p>
                 </div>
             </div>
@@ -816,7 +872,7 @@
                 <a href="tel:0752366468" class="comm-link"><i class="fas fa-phone-alt"></i> Piga Studio</a>
                 <a href="sms:0752366468" class="comm-link"><i class="fas fa-sms"></i> SMS</a>
                 <a href="https://wa.me/255752366468" target="_blank" class="comm-link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                <a href="tel:*150*00*#0752366468" class="comm-link comm-mpesa"><i class="fas fa-hand-holding-usd"></i> Sadaka M-Pesa: 0752366468 (Patrick Temba)</a>
+                <a href="tel:*150*00*#0752366468" class="comm-link comm-mpesa"><i class="fas fa-hand-holding-usd"></i> Sadaka M-Pesa: 0752366468</a>
             </div>
 
         </div>
@@ -1023,14 +1079,30 @@
         </div>
     </section>
 
-    <!-- DONATION SECTION -->
+    <!-- ANIMATED DONATION & PAYMENT SECTION (M-PESA & CRDB BANK) -->
     <section class="donate-box" id="donate">
-        <h2 class="section-title" style="color: white;">Saidia Huduma Hii</h2>
-        <div class="m-pesa-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/M-PESA_logo.png/640px-M-PESA_logo.png" alt="M-pesa" width="120">
-            <h2 style="margin: 15px 0; font-size: 2.2rem; letter-spacing: 1px;">0752 366 468</h2>
-            <p>Jina: <strong>PATRICK TEMBA</strong></p>
-            <button class="btn-action">Changia Sadaka Sasa</button>
+        <h2 class="section-title" style="color: white;">Changia Huduma Hii (Sadaka)</h2>
+        <p style="color: #cbd5e0; font-size: 0.95rem; max-width: 600px; margin: 0 auto;">Unapowezesha huduma hii, unasaidia Injili kuwafikia wengi duniani kote. Tumia M-Pesa au Benki ya CRDB kutuma sadaka yako.</p>
+        
+        <div class="payment-wrapper">
+            <!-- M-PESA CARD CONTAINER -->
+            <div class="animated-payment-card">
+                <span class="payment-type-badge">Vodacom M-Pesa</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/M-PESA_logo.png/640px-M-PESA_logo.png" alt="M-Pesa Logo" class="bank-logo-img">
+                <h3 style="font-size: 1.8rem; font-weight: 800; color: #00875a; margin: 5px 0;">0752 366 468</h3>
+                <p style="font-size: 0.9rem; font-weight: 700;">Jina: <span style="color: var(--primary-orange);">PATRICK TEMBA</span></p>
+                <a href="tel:*150*00*#0752366468" class="btn-action"><i class="fas fa-mobile-alt"></i> Tuma Sadaka</a>
+            </div>
+
+            <!-- CRDB BANK CARD CONTAINER -->
+            <div class="animated-payment-card card-crdb">
+                <span class="payment-type-badge" style="background: #006837;">CRDB Bank</span>
+                <img src="https://seeklogo.com/images/C/crdb-bank-logo-7209DFD268-seeklogo.com.png" alt="CRDB Bank Logo" class="bank-logo-img" onerror="this.src='https://via.placeholder.com/150x50?text=CRDB+BANK'">
+                <h3 style="font-size: 1.4rem; font-weight: 800; color: #006837; margin: 5px 0; letter-spacing: 1px;">0152XXXXXXX</h3>
+                <p style="font-size: 0.9rem; font-weight: 700;">Jina: <span style="color: var(--primary-orange);">PATRICK TEMBA</span></p>
+                <p style="font-size: 0.78rem; opacity: 0.8; margin-top: 4px;">Tawi: Mwanza</p>
+                <button class="btn-action" style="background: #006837;" onclick="navigator.clipboard.writeText('0152XXXXXXX'); alert('Akaunti ya CRDB imenakiliwa!');"><i class="fas fa-copy"></i> Nakili Akaunti</button>
+            </div>
         </div>
     </section>
 
@@ -1137,7 +1209,7 @@
               }
           });
 
-        // Audio Player Controls
+        // Audio Player Controls - Imeboreshwa Kikamilifu kwa iOS / iPhone
         const radioPlayer = document.getElementById('radioPlayer');
         const playBtn = document.getElementById('playBtn');
         const pauseBtn = document.getElementById('pauseBtn');
@@ -1147,9 +1219,19 @@
         const volIcon = document.getElementById('volIcon');
 
         playBtn.addEventListener('click', () => {
-            radioPlayer.play().then(() => {
-                playBtn.style.opacity = '0.8';
-            }).catch(e => console.error(e));
+            // Kupyaisha stream upya ili Safari / iPhone isiweze kusimama au kuweka buffering ya zamani
+            radioPlayer.src = "https://pastoraloyce.duckdns.org/listen/kainos_fm_radio/radio.mp3";
+            radioPlayer.load();
+
+            const playPromise = radioPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    playBtn.style.opacity = '0.8';
+                }).catch(e => {
+                    console.error("Playback error:", e);
+                    alert("Kusikiliza kwenye iPhone: Hakikisha umewasha Sound au zima 'Low Power Mode' kisha ubonyeze Play tena.");
+                });
+            }
         });
 
         pauseBtn.addEventListener('click', () => {
@@ -1159,7 +1241,7 @@
 
         stopBtn.addEventListener('click', () => {
             radioPlayer.pause();
-            radioPlayer.currentTime = 0;
+            radioPlayer.removeAttribute('src'); // Husafisha audio stream kwa iPhone
             playBtn.style.opacity = '1';
         });
 
@@ -1201,7 +1283,7 @@
 
                     const stream = radioPlayer.captureStream ? radioPlayer.captureStream() : radioPlayer.mozCaptureStream();
                     if (!stream) {
-                        alert("Kivinjari chako hakisupport kudaka sauti kwa ajili ya kurekodi.");
+                        alert("Kivinjari hiki hakisupport kudaka sauti moja kwa moja.");
                         return;
                     }
 
@@ -1255,7 +1337,7 @@
         const statsFollowersRef = db.collection('stats').doc('kainos_followers');
         const statsSharesRef = db.collection('stats').doc('kainos_shares');
 
-        const BASE_FOLLOWERS = 0; // Ukiitaji kuanza na idadi fulani unaweza weka hapa
+        const BASE_FOLLOWERS = 0;
         const BASE_LIKES = 0;
         const BASE_SHARES = 0;
 
