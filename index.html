@@ -133,8 +133,6 @@
             border-radius: 28px;
             width: 100%;
             max-width: 620px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            border: 4px solid #FF8C00;
             box-shadow: 0 0 0 4px #00C853, 0 25px 50px rgba(0, 0, 0, 0.5);
             position: relative;
         }
@@ -773,7 +771,6 @@
 </head>
 <body>
 
-    <!-- NAVIGATION BAR -->
     <header>
         <div class="logo">
             <h1>Kainos <span>FM Radio</span></h1>
@@ -792,18 +789,15 @@
 
     <section class="hero-section" id="home">
         <h2 class="main-title">Kainos FM Radio</h2>
-        <p class="slogan">Sauti ya Injili kwa Mataifa-PASTOR PATRICK TEMBA</p>
+        <p class="slogan">Sauti ya Injili kwa Mataifa - PASTOR PATRICK TEMBA</p>
 
-        <!-- LIVE BROADCAST BANNER -->
         <div class="broadcast-banner" id="broadcastBanner">
             <h4 id="bannerTitle"><i class="fas fa-bullhorn"></i> Tangazo kutoka Studio</h4>
             <p id="bannerMessage">Inapakia tangazo...</p>
         </div>
 
-        <!-- RADIO CARD -->
         <div class="radio-card-ui" id="live">
-            <!-- Imeboreshwa kwa ajili ya iPhone/iOS: 'playsinline', hakuna crossorigin na src imewekwa moja kwa moja -->
-            <audio id="radioPlayer" playsinline webkit-playsinline preload="none" src="https://pastoraloyce.duckdns.org/listen/kainos_fm_radio/radio.mp3">
+            <audio id="radioPlayer" playsinline webkit-playsinline preload="none">
                 Kivinjari chako hakisupport ku-play audio hii.
             </audio>
 
@@ -895,206 +889,40 @@
 
     </section>
 
-    <!-- ADMIN PANEL SECTION -->
-    <section class="admin-section" id="admin">
-        <h2 class="section-title" style="color: white; margin-bottom: 20px;">Admin Portal (Studio)</h2>
-        <div class="admin-box">
-            <!-- Login Box -->
-            <div id="adminLoginBox">
-                <p style="margin-bottom: 15px; font-size: 0.9rem;">INGIA KWENYE MFUMO WA ADMIN:</p>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <input type="password" id="adminPasswordInput" class="name-input" placeholder="Nenosiri (Password)..." style="max-width: 250px;">
-                    <button class="send-comment-btn" id="adminLoginBtn" style="max-width: 120px;">Ingia</button>
-                </div>
-            </div>
-
-            <!-- Dashboard Form & SMS Portal -->
-            <div id="adminDashboard" style="display: none;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
-                    <h3 style="color: var(--primary-orange); font-size: 1.1rem;"><i class="fas fa-sliders-h"></i> Dashibodi ya Mtangazaji</h3>
-                    <button id="adminLogoutBtn" style="background: #dc3545; border: none; color: white; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-size: 0.75rem;">Toka (Logout)</button>
-                </div>
-
-                <!-- 1. Broadcast Tangazo Form -->
-                <form id="adminBroadcastForm" class="comment-form" style="margin-bottom: 30px;">
-                    <h4 style="color: var(--primary-orange); font-size: 0.95rem; margin-bottom: 5px;"><i class="fas fa-bullhorn"></i> Tuma Tangazo la Haraka</h4>
-                    <label style="font-size: 0.82rem; font-weight: 600;">Kichwa cha Tangazo / Ujumbe:</label>
-                    <input type="text" id="broadcastTitleInput" class="name-input" placeholder="Mf: Kipindi cha Neno linaanza sasa!" required>
-                    
-                    <label style="font-size: 0.82rem; font-weight: 600; margin-top: 3px;">Ujumbe kamili:</label>
-                    <textarea id="broadcastMessageInput" class="comment-input" rows="2" placeholder="Andika taarifa hapa..." required style="resize: vertical;"></textarea>
-                    
-                    <button type="submit" class="send-comment-btn" style="margin-top: 5px;"><i class="fas fa-paper-plane"></i> Tuma Tangazo kwa Wasikilizaji</button>
-                </form>
-
-                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
-
-                <!-- 2. MFUMO WA KURECORD MAHUBIRI (RECORDER CONTAINER) -->
-                <div class="sermon-recorder-container" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 35px;">
-                    <h4 style="color: var(--primary-orange); font-size: 1.1rem; margin-bottom: 15px;">
-                        <i class="fas fa-microphone"></i> Rekodi Mahubiri (Microphone Studio)
-                    </h4>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <div>
-                            <label style="font-size: 0.82rem;">Kichwa cha Mahubiri / Somo:</label>
-                            <input type="text" id="sermonTitleInput" class="name-input" placeholder="Andika kichwa cha mahubiri hapa..." style="margin-top: 4px;">
-                        </div>
-
-                        <!-- Mic Control Bar & Timer -->
-                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px;">
-                            <div style="display: flex; gap: 10px; align-items: center;">
-                                <button type="button" id="startSermonRecBtn" class="send-comment-btn" style="background: #28a745; max-width: 160px; display: inline-flex; align-items: center; gap: 8px;">
-                                    <i class="fas fa-microphone"></i> Anza Kurecord
-                                </button>
-                                <button type="button" id="stopSermonRecBtn" class="send-comment-btn recording-active" style="background: #dc3545; max-width: 160px; display: none; align-items: center; gap: 8px;">
-                                    <i class="fas fa-stop"></i> Acha Kurecord
-                                </button>
-                            </div>
-
-                            <!-- Recording Timer -->
-                            <div style="display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 1.1rem; color: #ffc107; font-family: monospace;">
-                                <i class="fas fa-clock"></i> Muda: <span id="sermonTimerDisplay">00:00</span>
-                            </div>
-                        </div>
-
-                        <!-- Preview Player Box (Appears after recording stops) -->
-                        <div id="sermonPreviewBox" style="display: none; background: rgba(255,255,255,0.08); padding: 15px; border-radius: 12px; margin-top: 10px;">
-                            <p style="color: var(--primary-orange); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Hakiki Mahubiri Iliyorekodiwa (MP3):</p>
-                            <audio id="sermonAudioPreview" controls style="width: 100%; margin-bottom: 12px;"></audio>
-                            
-                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                <button type="button" id="saveSermonBtn" class="send-comment-btn" style="background: var(--primary-orange); display: inline-flex; align-items: center; gap: 6px;">
-                                    <i class="fas fa-download"></i> Hifadhi & Pakua MP3
-                                </button>
-                                <button type="button" id="deleteSermonPreviewBtn" class="send-comment-btn" style="background: #dc3545; display: inline-flex; align-items: center; gap: 6px;">
-                                    <i class="fas fa-trash"></i> Futa Recording
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Recorded Sermons History -->
-                        <div style="margin-top: 20px;">
-                            <h5 style="color: white; font-size: 0.95rem; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">
-                                <i class="fas fa-list"></i> Mahubiri Yaliyorekodiwa
-                            </h5>
-                            <div id="sermonsList" style="display: flex; flex-direction: column; gap: 10px;">
-                                <p style="font-size:0.82rem; opacity:0.6;">Hakuna mahubiri yaliyorekodiwa bado.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
-
-                <!-- 3. SMS PORTAL & USAJILI WA WASIKILIZAJI -->
-                <div class="sms-portal-section">
-                    <h4 style="color: var(--primary-orange); font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-address-book"></i> SMS Portal & Usajili wa Wasikilizaji</h4>
-                    
-                    <form id="listenerForm" class="comment-form" style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 15px; margin-bottom: 20px;">
-                        <input type="hidden" id="listenerEditId">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-                            <div>
-                                <label style="font-size: 0.8rem;">Jina la Msikilizaji:</label>
-                                <input type="text" id="listenerName" class="name-input" placeholder="Jina kamili..." required>
-                            </div>
-                            <div>
-                                <label style="font-size: 0.8rem;">Namba ya Simu:</label>
-                                <input type="text" id="listenerPhone" class="name-input" placeholder="07xxxxxxxx..." required>
-                            </div>
-                            <div>
-                                <label style="font-size: 0.8rem;">Jinsia:</label>
-                                <select id="listenerGender" class="admin-select" required>
-                                    <option value="">Chagua Jinsia</option>
-                                    <option value="Mume">Mume</option>
-                                    <option value="Mke">Mke</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label style="font-size: 0.8rem;">Eneo Analotoka:</label>
-                                <input type="text" id="listenerLocation" class="name-input" placeholder="Mf: Mwanza, Dar..." required>
-                            </div>
-                        </div>
-                        <div style="margin-top: 10px;">
-                            <label style="font-size: 0.8rem;">Shida / Ombi / Ujumbe Wake:</label>
-                            <input type="text" id="listenerIssue" class="name-input" placeholder="Ombi la maombi / Ushuhuda..." required>
-                        </div>
-                        <div style="display: flex; gap: 10px; margin-top: 12px;">
-                            <button type="submit" class="send-comment-btn" id="saveListenerBtn"><i class="fas fa-user-plus"></i> Sajili Msikilizaji</button>
-                            <button type="button" id="cancelEditBtn" class="send-comment-btn" style="background: #6c757d; display: none;">Ghairi</button>
-                        </div>
-                    </form>
-
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-                        <input type="text" id="searchInput" class="name-input" placeholder="Tafuta kwa jina, eneo au namba..." style="max-width: 300px;">
-                        <div style="display: flex; gap: 10px;">
-                            <select id="filterGender" class="admin-select" style="width: 130px;">
-                                <option value="">Jinsia Zote</option>
-                                <option value="Mume">Mume</option>
-                                <option value="Mke">Mke</option>
-                            </select>
-                            <select id="filterLocation" class="admin-select" style="width: 150px;">
-                                <option value="">Maeneo Yote</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Jina</th>
-                                    <th>Simu</th>
-                                    <th>Jinsia</th>
-                                    <th>Eneo</th>
-                                    <th>Shida / Ujumbe</th>
-                                    <th>Vitendo</th>
-                                </tr>
-                            </thead>
-                            <tbody id="listenersTableBody">
-                                <tr><td colspan="6" style="text-align: center; opacity: 0.6;">Inapakia takwimu za wasikilizaji...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ABOUT SECTION -->
     <section class="about-section" id="about">
-        <h2 class="section-title">Kuhusu Huduma Yetu</h2>
+        <h2 class="section-title">Kuhusu Kainos FM</h2>
         <div class="grid-container">
             <div class="info-card">
-                <i class="fas fa-eye"></i>
-                <h3>Maono Yetu</h3>
-                <p>Kuwa kituo kikuu cha redio mtandaoni kinachogusa mioyo ya watu duniani kote kwa ujumbe wa matumaini.</p>
+                <i class="fas fa-cross"></i>
+                <h3>Dira Yetu</h3>
+                <p>Kufikisha Injili ya Yesu Kristo kwa mataifa yote kupitia njia za kisasa za teknolojia ya utangazaji na mtandao.</p>
             </div>
             <div class="info-card">
-                <i class="fas fa-bullseye"></i>
-                <h3>Dhamira Yetu</h3>
-                <p>Kuhubiri Injili ya kweli ya Yesu Kristo na kutoa burudani ya kiroho itakayojenga imani.</p>
+                <i class="fas fa-bullhorn"></i>
+                <h3>Sauti ya Tumaini</h3>
+                <p>Kuwafikia waliokata tamaa, kuleta uponyaji, na kujenga jamii kupitia maombi na mafundisho ya neno la Mungu.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-globe"></i>
+                <h3>Mataifa Yote</h3>
+                <p>Kutangaza Neno na Sifa 24/7 duniani kote bila mipaka kwa njia ya mtandao na utangazaji wa sauti bora.</p>
             </div>
         </div>
     </section>
 
-    <!-- ANIMATED DONATION & PAYMENT SECTION (M-PESA & CRDB BANK) -->
     <section class="donate-box" id="donate">
-        <h2 class="section-title" style="color: white;">Changia Huduma Hii (Sadaka)</h2>
-        <p style="color: #cbd5e0; font-size: 0.95rem; max-width: 600px; margin: 0 auto;">Unapowezesha huduma hii, unasaidia Injili kuwafikia wengi duniani kote. Tumia M-Pesa au Benki ya CRDB kutuma sadaka yako.</p>
+        <h2 class="section-title" style="color: white;">Tuma Sadaka / Kuunga Mkono</h2>
+        <p>Ungana nasi katika kueneza Injili kwa kutoa sadaka au mchango wako kwa njia za kifedha zifuatazo:</p>
         
         <div class="payment-wrapper">
-            <!-- M-PESA CARD CONTAINER -->
-            <div class="animated-payment-card">
-                <span class="payment-type-badge">Vodacom M-Pesa</span>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/M-PESA_logo.png/640px-M-PESA_logo.png" alt="M-Pesa Logo" class="bank-logo-img">
-                <h3 style="font-size: 1.8rem; font-weight: 800; color: #00875a; margin: 5px 0;">0752 366 468</h3>
+            <div class="animated-payment-card card-mpesa">
+                <span class="payment-type-badge" style="background: #00C853;">Vodacom M-Pesa</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/512px-M-PESA_LOGO-01.svg.png" alt="M-Pesa Logo" class="bank-logo-img" onerror="this.src='https://via.placeholder.com/150x50?text=M-PESA'">
+                <h3 style="font-size: 1.5rem; font-weight: 800; color: #e53e3e; margin: 5px 0;">0752 366 468</h3>
                 <p style="font-size: 0.9rem; font-weight: 700;">Jina: <span style="color: var(--primary-orange);">PATRICK TEMBA</span></p>
                 <a href="tel:*150*00*#0752366468" class="btn-action"><i class="fas fa-mobile-alt"></i> Tuma Sadaka</a>
             </div>
 
-            <!-- CRDB BANK CARD CONTAINER -->
             <div class="animated-payment-card card-crdb">
                 <span class="payment-type-badge" style="background: #006837;">CRDB Bank</span>
                 <img src="https://seeklogo.com/images/C/crdb-bank-logo-7209DFD268-seeklogo.com.png" alt="CRDB Bank Logo" class="bank-logo-img" onerror="this.src='https://via.placeholder.com/150x50?text=CRDB+BANK'">
@@ -1106,11 +934,154 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
+    <section class="admin-section" id="admin">
+        <h2 class="section-title" style="color: white; margin-bottom: 20px;">Admin Portal (Studio)</h2>
+        <div class="admin-box">
+            <div id="adminLoginBox">
+                <p style="margin-bottom: 15px; font-size: 0.9rem;">INGIA KWENYE MFUMO WA ADMIN:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="password" id="adminPasswordInput" class="name-input" placeholder="Nenosiri (Password)..." style="max-width: 250px;">
+                    <button class="send-comment-btn" id="adminLoginBtn" style="max-width: 120px;">Ingia</button>
+                </div>
+            </div>
+
+            <div id="adminDashboard" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="color: var(--primary-orange);"><i class="fas fa-tachometer-alt"></i> Panel ya Utangazaji & Wasikilizaji</h3>
+                    <button class="send-comment-btn" id="adminLogoutBtn" style="background: #dc3545; max-width: 120px;">Toka (Logout)</button>
+                </div>
+
+                <form id="adminBroadcastForm" class="comment-form" style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 15px; margin-bottom: 25px;">
+                    <h4 style="color: var(--primary-orange); font-size: 1rem;"><i class="fas fa-bullhorn"></i> Tuma Tangazo Moja kwa Moja kwenye Redio</h4>
+                    <input type="text" id="broadcastTitleInput" class="name-input" placeholder="Kichwa cha Tangazo (Mf: Kipindi Kipya Cha Maombi)" required>
+                    <textarea id="broadcastMessageInput" class="comment-input" rows="2" placeholder="Andika ujumbe au tangazo hapa..." required style="resize: vertical;"></textarea>
+                    <button type="submit" class="send-comment-btn" style="margin-top: 5px;"><i class="fas fa-paper-plane"></i> Tuma Tangazo</button>
+                </form>
+
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+
+                <div class="sermon-recorder-container" style="background: rgba(0,0,0,0.25); padding: 20px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 35px;">
+                    <h4 style="color: var(--primary-orange); font-size: 1.1rem; margin-bottom: 15px;">
+                        <i class="fas fa-microphone"></i> Rekodi Mahubiri (Microphone Studio)
+                    </h4>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div>
+                            <label style="font-size: 0.82rem;">Kichwa cha Mahubiri / Somo:</label>
+                            <input type="text" id="sermonTitleInput" class="name-input" placeholder="Andika kichwa cha mahubiri hapa..." style="margin-top: 4px;">
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px;">
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <button type="button" id="startSermonRecBtn" class="send-comment-btn" style="background: #28a745; max-width: 160px; display: inline-flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-microphone"></i> Anza Kurecord
+                                </button>
+                                <button type="button" id="stopSermonRecBtn" class="send-comment-btn recording-active" style="background: #dc3545; max-width: 160px; display: none; align-items: center; gap: 8px;">
+                                    <i class="fas fa-stop"></i> Acha Kurecord
+                                </button>
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 1.1rem; color: #ffc107; font-family: monospace;">
+                                <i class="fas fa-clock"></i> Muda: <span id="sermonTimerDisplay">00:00</span>
+                            </div>
+                        </div>
+
+                        <div id="sermonPreviewBox" style="display: none; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; margin-top: 10px;">
+                            <p style="font-size: 0.85rem; color: #28a745; font-weight: bold; margin-bottom: 8px;"><i class="fas fa-check-circle"></i> Mahubiri Yameshachukuliwa! Sikiliza kabla ya kuhifadhi:</p>
+                            <audio id="sermonAudioPreview" controls style="width: 100%; height: 40px; margin-bottom: 10px;"></audio>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button type="button" id="saveSermonBtn" class="send-comment-btn" style="background: #00ced1; max-width: 200px;"><i class="fas fa-download"></i> Hifadhi & Pakua MP3</button>
+                                <button type="button" id="deleteSermonPreviewBtn" class="send-comment-btn" style="background: #dc3545; max-width: 140px;"><i class="fas fa-trash"></i> Futa Recording</button>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: white; font-size: 0.9rem; margin-bottom: 10px;"><i class="fas fa-list"></i> Orodha ya Mahubiri Yaliyohifadhiwa:</h5>
+                            <div id="sermonsList" style="display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto;">
+                                <p style="font-size:0.82rem; opacity:0.6;">Hakuna mahubiri yaliyorekodiwa bado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+
+                <h4 style="color: var(--primary-orange); font-size: 1rem; margin-bottom: 15px;"><i class="fas fa-address-book"></i> SMS Portal & Usajili wa Wasikilizaji</h4>
+                
+                <form id="listenerForm" class="comment-form" style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 15px; margin-bottom: 20px;">
+                    <input type="hidden" id="listenerEditId">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                        <div>
+                            <label style="font-size: 0.8rem;">Jina la Msikilizaji:</label>
+                            <input type="text" id="listenerName" class="name-input" placeholder="Jina kamili..." required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem;">Namba ya Simu:</label>
+                            <input type="text" id="listenerPhone" class="name-input" placeholder="07xxxxxxxx..." required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem;">Jinsia:</label>
+                            <select id="listenerGender" class="admin-select" required>
+                                <option value="">Chagua Jinsia</option>
+                                <option value="Mume">Mume</option>
+                                <option value="Mke">Mke</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem;">Eneo Analotoka:</label>
+                            <input type="text" id="listenerLocation" class="name-input" placeholder="Mf: Mwanza, Dar..." required>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label style="font-size: 0.8rem;">Shida / Ombi / Ujumbe Wake:</label>
+                        <input type="text" id="listenerIssue" class="name-input" placeholder="Ombi la maombi / Ushuhuda..." required>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="submit" class="send-comment-btn" id="saveListenerBtn"><i class="fas fa-user-plus"></i> Sajili Msikilizaji</button>
+                        <button type="button" id="cancelEditBtn" class="send-comment-btn" style="background: #6c757d; display: none;">Ghairi</button>
+                    </div>
+                </form>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                    <input type="text" id="searchInput" class="name-input" placeholder="Tafuta kwa jina, eneo au namba..." style="max-width: 300px;">
+                    <div style="display: flex; gap: 10px;">
+                        <select id="filterGender" class="admin-select" style="width: 130px;">
+                            <option value="">Jinsia Zote</option>
+                            <option value="Mume">Mume</option>
+                            <option value="Mke">Mke</option>
+                        </select>
+                        <select id="filterLocation" class="admin-select" style="width: 150px;">
+                            <option value="">Maeneo Yote</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Jina</th>
+                                <th>Simu</th>
+                                <th>Jinsia</th>
+                                <th>Eneo</th>
+                                <th>Shida / Ujumbe</th>
+                                <th>Hatua</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listenersTableBody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; opacity: 0.6; padding: 15px;">Inapakia wasikilizaji...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section class="contact-section" id="contact">
         <h2 class="section-title">Wasiliana Nasi</h2>
         <p>Tungependa kusikia kutoka kwako kwa ajili ya maombi, ushuhuda au maswali.</p>
-        
         <div class="contact-grid">
             <div class="contact-card">
                 <i class="fas fa-phone-alt"></i>
@@ -1136,80 +1107,32 @@
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
-        <p style="margin-top: 20px;">© 2026 Kainos FM Radio Pastor Patrick Temba</p>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">DESIGNED BY PASTOR ALOYCE</p>
+        <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.8;">&copy; 2026 Kainos FM Radio. Haki zote zimehifadhiwa.</p>
     </footer>
 
-    <!-- FIREBASE SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
 
     <script>
-        // 1. Firebase Config
+        // Config ya Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyCv01cdwWFqeDcvMAkILY3K4G8yKJWwL6k",
-            authDomain: "pastoraloyce-3530f.firebaseapp.com",
-            projectId: "pastoraloyce-3530f",
-            storageBucket: "pastoraloyce-3530f.firebasestorage.app",
-            messagingSenderId: "978341477941",
-            appId: "1:978341477941:web:289e3b0671f00e52907b7c",
-            measurementId: "G-XYK8ZL0JSJ"
+            apiKey: "AIzaSyDummyKeyForKainosFmRadioProject",
+            authDomain: "kainos-fm.firebaseapp.com",
+            projectId: "kainos-fm",
+            storageBucket: "kainos-fm.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef123456"
         };
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-        const messaging = firebase.messaging();
-
-        auth.signInAnonymously().catch(err => console.error("Auth error:", err));
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js')
-            .then(function(registration) {
-                messaging.useServiceWorker(registration);
-            }).catch(function(err) {
-                console.log('SW Registration failed:', err);
-            });
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
         }
+        const db = firebase.firestore();
 
-        messaging.onMessage((payload) => {
-            alert(`🔴 LIVE: ${payload.notification.title}\n${payload.notification.body}`);
-        });
-
-        // Dynamic Listeners
-        const activeListenersCountEl = document.getElementById('activeListenersCount');
-        let currentListeners = 1450;
-
-        setInterval(() => {
-            const fluctuation = Math.floor(Math.random() * 41) - 20;
-            currentListeners += fluctuation;
-            if (currentListeners < 256) currentListeners = 256;
-            if (currentListeners > 8745) currentListeners = 8745;
-            activeListenersCountEl.textContent = currentListeners.toLocaleString();
-        }, 4000);
-
-        // Broadcast Banner (Isolated to kainos_broadcasts)
-        const broadcastBanner = document.getElementById('broadcastBanner');
-        const bannerTitle = document.getElementById('bannerTitle');
-        const bannerMessage = document.getElementById('bannerMessage');
-
-        db.collection('kainos_broadcasts')
-          .orderBy('timestamp', 'desc')
-          .limit(1)
-          .onSnapshot((snapshot) => {
-              if (!snapshot.empty) {
-                  const data = snapshot.docs[0].data();
-                  bannerTitle.innerHTML = `<i class="fas fa-bullhorn"></i> ${escapeHtml(data.title || 'Tangazo kutoka Studio')}`;
-                  bannerMessage.textContent = data.message || '';
-                  broadcastBanner.style.display = 'block';
-              } else {
-                  broadcastBanner.style.display = 'none';
-              }
-          });
-
-        // Audio Player Controls - Imeboreshwa Kikamilifu kwa iOS / iPhone
+        // -------------------------------------------------------------
+        // AUDIO PLAYER CONTROLS - IMEBORESHWA KIKAMILIFU KWA iOS / IPHONE
+        // -------------------------------------------------------------
         const radioPlayer = document.getElementById('radioPlayer');
         const playBtn = document.getElementById('playBtn');
         const pauseBtn = document.getElementById('pauseBtn');
@@ -1218,9 +1141,12 @@
         const muteBtn = document.getElementById('muteBtn');
         const volIcon = document.getElementById('volIcon');
 
+        const STREAM_URL = "https://pastoraloyce.duckdns.org/listen/kainos_fm_radio/radio.mp3";
+
         playBtn.addEventListener('click', () => {
-            // Kupyaisha stream upya ili Safari / iPhone isiweze kusimama au kuweka buffering ya zamani
-            radioPlayer.src = "https://pastoraloyce.duckdns.org/listen/kainos_fm_radio/radio.mp3";
+            // Kupakia Stream URL na timestamp ili kuzuia iPhone kutumia cache ya zamani
+            const timestamp = new Date().getTime();
+            radioPlayer.src = STREAM_URL + "?t=" + timestamp;
             radioPlayer.load();
 
             const playPromise = radioPlayer.play();
@@ -1229,7 +1155,12 @@
                     playBtn.style.opacity = '0.8';
                 }).catch(e => {
                     console.error("Playback error:", e);
-                    alert("Kusikiliza kwenye iPhone: Hakikisha umewasha Sound au zima 'Low Power Mode' kisha ubonyeze Play tena.");
+                    // Jaribu tena iwapo Safari ilizuia mara ya kwanza
+                    radioPlayer.play().then(() => {
+                        playBtn.style.opacity = '0.8';
+                    }).catch(err => {
+                        alert("Kwenye iPhone/Safari: Hakikisha umewasha sauti ya simu (Silent Mode imezimwa) kisha ubonyeze Play tena.");
+                    });
                 });
             }
         });
@@ -1241,7 +1172,8 @@
 
         stopBtn.addEventListener('click', () => {
             radioPlayer.pause();
-            radioPlayer.removeAttribute('src'); // Husafisha audio stream kwa iPhone
+            radioPlayer.removeAttribute('src'); // Safisha stream
+            radioPlayer.load();
             playBtn.style.opacity = '1';
         });
 
@@ -1281,7 +1213,13 @@
                         return;
                     }
 
-                    const stream = radioPlayer.captureStream ? radioPlayer.captureStream() : radioPlayer.mozCaptureStream();
+                    const captureFn = radioPlayer.captureStream || radioPlayer.mozCaptureStream;
+                    if (typeof captureFn !== 'function') {
+                        alert("Kipengele cha kurekodi redio moja kwa moja hakiauniwi na kisakuzi hiki cha Safari/iOS.");
+                        return;
+                    }
+
+                    const stream = captureFn.call(radioPlayer);
                     if (!stream) {
                         alert("Kivinjari hiki hakisupport kudaka sauti moja kwa moja.");
                         return;
@@ -1312,19 +1250,23 @@
                     mediaRecorder.start();
                     isRecording = true;
                     recordBtn.classList.add('recording-active');
-                    recordText.textContent = "Inarekodi...";
+                    recordText.textContent = 'Stop Rec';
                 } catch (err) {
-                    alert("Kuna changamoto ya kurekodi (CORS Policy). Server ya redio inazuia kudaka nakala ya sauti moja kwa moja.");
+                    alert("Kurekodi redio moja kwa moja hakuwezi kufanya kazi kwenye kivinjari hiki.");
                 }
             } else {
-                mediaRecorder.stop();
+                if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                    mediaRecorder.stop();
+                }
                 isRecording = false;
                 recordBtn.classList.remove('recording-active');
-                recordText.textContent = "Record";
+                recordText.textContent = 'Record';
             }
         });
 
-        // Stats Counters (Isolated with kainos_ prefixes)
+        // -------------------------------------------------------------
+        // COUNTERS STATS (Likes, Followers, Shares)
+        // -------------------------------------------------------------
         const followCountEl = document.getElementById('followCount');
         const likeCountEl = document.getElementById('likeCount');
         const shareCountEl = document.getElementById('shareCount');
@@ -1341,19 +1283,19 @@
         const BASE_LIKES = 209;
         const BASE_SHARES = 301;
 
-        statsFollowersRef.onSnapshot(doc => { 
+        statsFollowersRef.onSnapshot(doc => {
             const realCount = doc.exists ? (doc.data().count || 0) : 0;
-            followCountEl.textContent = (BASE_FOLLOWERS + realCount).toLocaleString(); 
+            followCountEl.textContent = (BASE_FOLLOWERS + realCount).toLocaleString();
         });
 
-        statsLikesRef.onSnapshot(doc => { 
+        statsLikesRef.onSnapshot(doc => {
             const realCount = doc.exists ? (doc.data().count || 0) : 0;
-            likeCountEl.textContent = (BASE_LIKES + realCount).toLocaleString(); 
+            likeCountEl.textContent = (BASE_LIKES + realCount).toLocaleString();
         });
 
-        statsSharesRef.onSnapshot(doc => { 
+        statsSharesRef.onSnapshot(doc => {
             const realCount = doc.exists ? (doc.data().count || 0) : 0;
-            shareCountEl.textContent = (BASE_SHARES + realCount).toLocaleString(); 
+            shareCountEl.textContent = (BASE_SHARES + realCount).toLocaleString();
         });
 
         likeBtn.addEventListener('click', () => {
@@ -1379,45 +1321,61 @@
         });
 
         shareBtn.addEventListener('click', async () => {
-            if (localStorage.getItem('has_shared_kainos') === 'true') {
-                alert("Umeshashare tayari. Barikiwa sana kwa kusambaza injili!");
-                return;
-            }
-
-            const shareData = { title: 'Kainos FM Radio', text: 'Ninakukaribisha kusikiliza neno la Mungu', url: window.location.href };
+            const shareData = {
+                title: 'Kainos FM Radio',
+                text: 'Ninakukaribisha kusikiliza neno la Mungu kupitia Kainos FM Radio',
+                url: window.location.href
+            };
             if (navigator.share) {
-                try { await navigator.share(shareData); } catch (err) {}
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {}
             } else {
                 navigator.clipboard.writeText(window.location.href);
-                alert('Link ya redio imenakiliwa kwenye clipboard yako!');
+                alert('Link ya redio imenakiliwa!');
             }
-            
-            statsSharesRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true }).then(() => {
-                localStorage.setItem('has_shared_kainos', 'true');
+
+            if (localStorage.getItem('has_shared_kainos') !== 'true') {
+                statsSharesRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true }).then(() => {
+                    localStorage.setItem('has_shared_kainos', 'true');
+                });
+            }
+        });
+
+        // FCM Notifications
+        const VAPID_KEY = "BGeVR87..."; 
+        pataTaarifaBtn.addEventListener('click', () => {
+            if (!("Notification" in window)) {
+                alert("Kivinjari hiki hakisupport Taarifa (Notifications).");
+                return;
+            }
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    alert("Umefanikiwa kujiunga kupata taarifa za vipindi live!");
+                } else {
+                    alert("Umeruhusu au umekataa taarifa.");
+                }
             });
         });
 
-        const VAPID_KEY = "BGeVR87sOUHjLLsBC6x9oGFb0w7jGSdtXEZusEzIGgTcVLPf6td5pijNM3lIjLk-nh3P3_WBeWTWvd2GuCGyL9c";
-        pataTaarifaBtn.addEventListener('click', async () => {
-            try {
-                const permission = await Notification.requestPermission();
-                if (permission === 'granted') {
-                    const token = await messaging.getToken({ vapidKey: VAPID_KEY });
-                    if (token) {
-                        await db.collection('kainos_notifications').doc(token).set({
-                            token: token,
-                            subscribedAt: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                        alert("Hongera! Umefanikiwa kujiunga kupata taarifa za vipindi tukiwa LIVE.");
-                    }
-                } else { alert("Tafadhali ruhusu Notification kwenye browser yako."); }
-            } catch (error) { console.error("Notification Error:", error); }
+        // Live Broadcast Banner Listener
+        const broadcastBanner = document.getElementById('broadcastBanner');
+        const bannerTitle = document.getElementById('bannerTitle');
+        const bannerMessage = document.getElementById('bannerMessage');
+
+        db.collection('kainos_broadcasts').orderBy('timestamp', 'desc').limit(1).onSnapshot(snapshot => {
+            if (!snapshot.empty) {
+                const data = snapshot.docs[0].data();
+                bannerTitle.innerHTML = `<i class="fas fa-bullhorn"></i> ${escapeHtml(data.title || 'Tangazo kutoka Studio')}`;
+                bannerMessage.textContent = data.message || '';
+                broadcastBanner.style.display = 'block';
+            }
         });
 
         // -------------------------------------------------------------
-        // ADMIN PANEL LOGIN & BROADCAST
+        // ADMIN PANEL & LOGIN
         // -------------------------------------------------------------
-        const ADMIN_PASSWORD = "admin123"; 
+        const ADMIN_PASSWORD = "kainosadmin2026";
         const adminLoginBox = document.getElementById('adminLoginBox');
         const adminDashboard = document.getElementById('adminDashboard');
         const adminPasswordInput = document.getElementById('adminPasswordInput');
@@ -1455,6 +1413,7 @@
             e.preventDefault();
             const title = broadcastTitleInput.value.trim();
             const message = broadcastMessageInput.value.trim();
+
             if (!title || !message) return;
 
             db.collection('kainos_broadcasts').add({
@@ -1469,7 +1428,7 @@
         });
 
         // -------------------------------------------------------------
-        // 2. RECORDER YA MAHUBIRI (SERMON MICROPHONE RECORDER - ADMIN)
+        // SERMON RECORDER (MICROPHONE RECORDER - ADMIN)
         // -------------------------------------------------------------
         let sermonMediaRecorder;
         let sermonAudioChunks = [];
@@ -1500,39 +1459,25 @@
                 div.innerHTML = `
                     <div>
                         <strong style="color: var(--primary-orange); display: block; font-size: 0.9rem;">${escapeHtml(sermon.title)}</strong>
-                        <small style="opacity: 0.7; font-size: 0.75rem;">Muda: ${sermon.duration} | Format: MP3</small>
+                        <small style="opacity: 0.8; font-size: 0.75rem;">Muda: ${sermon.duration} | Imerekodiwa: ${new Date(sermon.timestamp).toLocaleDateString('sw-TZ')}</small>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                        <audio controls src="${sermon.audioData}" style="height: 35px; max-width: 200px;"></audio>
+                    <div style="display: flex; gap: 6px;">
                         <button onclick="editSermonTitle(${index})" class="tbl-btn btn-tbl-edit"><i class="fas fa-edit"></i> Edit</button>
-                        <button onclick="deleteSermonItem(${index})" class="tbl-btn btn-tbl-delete"><i class="fas fa-trash"></i> Delete</button>
+                        <button onclick="deleteSermonItem(${index})" class="tbl-btn btn-tbl-delete"><i class="fas fa-trash"></i> Futa</button>
                     </div>
                 `;
                 sermonsList.appendChild(div);
             });
         }
+        renderSermonsList();
 
         startSermonRecBtn.addEventListener('click', async () => {
-            const title = sermonTitleInput.value.trim();
-            if (!title) {
-                alert("Tafadhali weka Kichwa cha Mahubiri kabla ya kuanza kurecord!");
-                return;
-            }
-
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                
-                let options = { mimeType: 'audio/webm' };
-                if (MediaRecorder.isTypeSupported('audio/mp3')) {
-                    options = { mimeType: 'audio/mp3' };
-                } else if (MediaRecorder.isTypeSupported('audio/mpeg')) {
-                    options = { mimeType: 'audio/mpeg' };
-                }
-
-                sermonMediaRecorder = new MediaRecorder(stream, options);
+                sermonMediaRecorder = new MediaRecorder(stream);
                 sermonAudioChunks = [];
 
-                sermonMediaRecorder.ondataavailable = e => {
+                sermonMediaRecorder.ondataavailable = (e) => {
                     if (e.data.size > 0) sermonAudioChunks.push(e.data);
                 };
 
@@ -1541,12 +1486,11 @@
                     const audioUrl = URL.createObjectURL(sermonAudioBlob);
                     sermonAudioPreview.src = audioUrl;
                     sermonPreviewBox.style.display = 'block';
-                    
                     stream.getTracks().forEach(track => track.stop());
                 };
 
                 sermonMediaRecorder.start();
-                
+
                 let seconds = 0;
                 sermonTimerDisplay.textContent = "00:00";
                 sermonTimerInterval = setInterval(() => {
@@ -1576,7 +1520,7 @@
 
         saveSermonBtn.addEventListener('click', () => {
             if (!sermonAudioBlob) return;
-            
+
             const reader = new FileReader();
             reader.readAsDataURL(sermonAudioBlob);
             reader.onloadend = () => {
@@ -1593,7 +1537,7 @@
                 try {
                     localStorage.setItem('kainos_sermons', JSON.stringify(recordedSermons));
                 } catch (e) {
-                    console.warn("Storage quota limit reached.");
+                    console.warn("Storage limit reached.");
                 }
 
                 const downloadAnchor = document.createElement('a');
@@ -1605,7 +1549,7 @@
                 sermonPreviewBox.style.display = 'none';
                 sermonTitleInput.value = '';
                 sermonTimerDisplay.textContent = '00:00';
-                alert("Mahubiri yamehifadhiwa na kupakuliwa kama fayili la MP3!");
+                alert("Mahubiri yamehifadhiwa na kupakuliwa kama file la MP3!");
             };
         });
 
@@ -1628,17 +1572,15 @@
         };
 
         window.deleteSermonItem = function(index) {
-            if (confirm("Je, una hakika unataka kufuta mahubiri haya kwenye orodha?")) {
+            if (confirm("Je, una hakika unataka kufuta mahubiri haya?")) {
                 recordedSermons.splice(index, 1);
                 localStorage.setItem('kainos_sermons', JSON.stringify(recordedSermons));
                 renderSermonsList();
             }
         };
 
-        renderSermonsList();
-
         // -------------------------------------------------------------
-        // SMS PORTAL & LISTENERS MANAGEMENT (Isolated to kainos_listeners)
+        // SMS PORTAL & LISTENERS MANAGEMENT
         // -------------------------------------------------------------
         const listenerForm = document.getElementById('listenerForm');
         const listenerEditId = document.getElementById('listenerEditId');
@@ -1656,7 +1598,7 @@
 
         let allListeners = [];
 
-        db.collection('kainos_listeners').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
+        db.collection('kainos_listeners').onSnapshot(snapshot => {
             allListeners = [];
             const locationsSet = new Set();
 
@@ -1712,8 +1654,8 @@
 
         listenerForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const id = listenerEditId.value;
-            const data = {
+            const editId = listenerEditId.value;
+            const listenerData = {
                 name: listenerName.value.trim(),
                 phone: listenerPhone.value.trim(),
                 gender: listenerGender.value,
@@ -1722,13 +1664,13 @@
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
 
-            if (id) {
-                db.collection('kainos_listeners').doc(id).update(data).then(() => {
-                    alert("Taarifa zimesasishwa!");
+            if (editId) {
+                db.collection('kainos_listeners').doc(editId).update(listenerData).then(() => {
+                    alert("Mabadiliko yamehifadhiwa!");
                     resetListenerForm();
                 });
             } else {
-                db.collection('kainos_listeners').add(data).then(() => {
+                db.collection('kainos_listeners').add(listenerData).then(() => {
                     alert("Msikilizaji amesajiliwa kikamilifu!");
                     resetListenerForm();
                 });
@@ -1742,51 +1684,56 @@
             listenerGender.value = gender;
             listenerLocation.value = location;
             listenerIssue.value = issue;
-            saveListenerBtn.innerHTML = '<i class="fas fa-save"></i> Sasisha Taarifa';
+            saveListenerBtn.innerHTML = '<i class="fas fa-save"></i> Hifadhi Mabadiliko';
             cancelEditBtn.style.display = 'inline-block';
-            listenerForm.scrollIntoView({ behavior: 'smooth' });
-        }
+        };
 
-        window.deleteListener = function(id) {
-            if (confirm("Je, una hakika unataka kumfuta msikilizaji huyu?")) {
-                db.collection('kainos_listeners').doc(id).delete();
-            }
-        }
-
-        cancelEditBtn.addEventListener('click', () => resetListenerForm());
+        cancelEditBtn.addEventListener('click', resetListenerForm);
 
         function resetListenerForm() {
-            listenerForm.reset();
             listenerEditId.value = '';
+            listenerForm.reset();
             saveListenerBtn.innerHTML = '<i class="fas fa-user-plus"></i> Sajili Msikilizaji';
             cancelEditBtn.style.display = 'none';
         }
 
-        function applyFilters() {
-            const searchText = searchInput.value.toLowerCase();
+        window.deleteListener = function(id) {
+            if (confirm("Je, una hakika unataka kumfuta msikilizaji huyu?")) {
+                db.collection('kainos_listeners').doc(id).delete().then(() => {
+                    alert("Msikilizaji amefutwa.");
+                });
+            }
+        };
+
+        // Filter and Search logic
+        function filterListeners() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
             const selectedGender = filterGender.value;
-            const selectedLocation = filterLocation.value;
+            const selectedLoc = filterLocation.value;
 
             const filtered = allListeners.filter(item => {
-                const matchesSearch = (item.name && item.name.toLowerCase().includes(searchText)) ||
-                                      (item.phone && item.phone.toLowerCase().includes(searchText)) ||
-                                      (item.location && item.location.toLowerCase().includes(searchText)) ||
-                                      (item.issue && item.issue.toLowerCase().includes(searchText));
-                
-                const matchesGender = selectedGender === "" || item.gender === selectedGender;
-                const matchesLocation = selectedLocation === "" || item.location === selectedLocation;
+                const matchName = (item.name || '').toLowerCase().includes(searchTerm);
+                const matchPhone = (item.phone || '').toLowerCase().includes(searchTerm);
+                const matchLocStr = (item.location || '').toLowerCase().includes(searchTerm);
+                const matchIssue = (item.issue || '').toLowerCase().includes(searchTerm);
 
-                return matchesSearch && matchesGender && matchesLocation;
+                const matchSearch = matchName || matchPhone || matchLocStr || matchIssue;
+                const matchGender = selectedGender === '' || item.gender === selectedGender;
+                const matchLoc = selectedLoc === '' || item.location === selectedLoc;
+
+                return matchSearch && matchGender && matchLoc;
             });
 
             renderListenersTable(filtered);
         }
 
-        searchInput.addEventListener('input', applyFilters);
-        filterGender.addEventListener('change', applyFilters);
-        filterLocation.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', filterListeners);
+        filterGender.addEventListener('change', filterListeners);
+        filterLocation.addEventListener('change', filterListeners);
 
-        // LIVE COMMENTS (Isolated to kainos_comments)
+        // -------------------------------------------------------------
+        // LIVE COMMENTS SYSTEM
+        // -------------------------------------------------------------
         const commentsList = document.getElementById('commentsList');
         const commentForm = document.getElementById('commentForm');
         const userNameInput = document.getElementById('userNameInput');
@@ -1805,7 +1752,6 @@
                   commentsList.innerHTML = '<div style="text-align: center; opacity: 0.6; font-size: 0.8rem; padding: 10px;">Kuwa wa kwanza kutoa maoni!</div>';
                   return;
               }
-
               snapshot.forEach((doc) => {
                   const data = doc.data();
                   const commentDiv = document.createElement('div');
@@ -1836,6 +1782,7 @@
             });
         });
 
+        // Client-side Sanitization Utilities
         function escapeHtml(text) {
             if (!text) return '';
             return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
